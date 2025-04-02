@@ -11,6 +11,5 @@ function [distance, bearing] = Euclidean_distance(x1, y1, x2, y2)
     end
 
     % Display debug info
-    disp(['Computing Distance: x1=', num2str(x1), ' y1=', num2str(y1), ...
-          ' x2=', num2str(x2), ' y2=', num2str(y2), ' dist=', num2str(distance)]);
+    disp(['Computing Distance: x1=', num2str(x1), ' y1=', num2str(y1),' dist=', num2str(distance)]);
 end

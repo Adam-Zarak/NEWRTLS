@@ -12,11 +12,11 @@ target_x = 250;
 target_y = 250;
 dt = 0.1;
 t = 0;
-max_time = 60;
+max_time = 150;
 yaw = 0;
 yaw_error_prev = 0;
 altitude = 750;
-velocity_z = -15;
+velocity_z = -5;
 
 % Controller Gains
 Kp = 1.2;
@@ -37,7 +37,7 @@ while t < max_time && altitude > 0
     yaw_error_prev = yaw_error;
 
     % Simulate sensor & motion update
-    [altitude, velocity_z, current_x, current_y, yaw] = get_sensor_data(servo_cmd, current_x, current_y, altitude, velocity_z, yaw);
+    [altitude, velocity_z, current_x, current_y, yaw] = get_sensor_data(servo_cmd, current_x, current_y, altitude, velocity_z, yaw, dt);
 
     % Log data
     log_telemetry(t, yaw, target_bearing, yaw_error, servo_cmd, current_x, current_y, altitude, velocity_z, distance_to_target);
