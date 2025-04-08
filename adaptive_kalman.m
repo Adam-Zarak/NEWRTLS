@@ -13,6 +13,9 @@ function [yaw_estimate, P] = adaptive_kalman(yaw_target, yaw_estimate_prev, P, Q
     % Update estimate
     yaw_estimate = yaw_estimate_prev + K * (yaw_target - yaw_estimate_prev);
 
+    % Normalize yaw_estimate to [0, 360]
+    yaw_estimate = mod(yaw_estimate, 360);
+
     % Update covariance
     P = (1 - K) * P;
 end
