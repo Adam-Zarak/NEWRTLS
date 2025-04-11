@@ -150,4 +150,33 @@ end
 
 global FINAL_DISTANCE;
 
+% Create traj_data matrix from simulation logs
+% Format: [time, latitude, longitude, altitude, roll, pitch, heading]
+
+time = (0:length(x_log)-1)' * dt;
+
+% Convert from feet to degrees (local offsets from Iceland)
+% 1 degree latitude ≈ 364,000 ft
+% 1 degree longitude ≈ 288,200 ft at ~64°N
+lat0 = 63.9850;
+lon0 = -22.6050;
+
+latitude = lat0 + y_log(:) / 364000;
+longitude = lon0 + x_log(:) / 288200;
+altitude = z_log(:);     % Already in feet
+roll = zeros(size(time));
+pitch = zeros(size(time));
+heading = yaw * ones(size(time)); % Or log actual yaw over time
+
+traj_data = [time, latitude, longitude, altitude, roll, pitch, heading];
+
+
+% Shift trajectory to Iceland for FlightGear compatibility
+traj_data = shift_trajectory_to_iceland(traj_data);
+
+% Export
+writematrix(traj_data, 'flightgear_trajectory.txt', 'Delimiter', 'tab');
+fprintf('FlightGear trajectory exported to flightgear_trajectory.txt\n');
+
+
 
