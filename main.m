@@ -164,15 +164,13 @@ lon0 = -22.6050;
 latitude = lat0 + y_log(:) / 364000;
 longitude = lon0 + x_log(:) / 288200;
 altitude = z_log(:);     % Already in feet
-roll = zeros(size(time));
-pitch = zeros(size(time));
-heading = yaw * ones(size(time)); % Or log actual yaw over time
+pitch = -5 + 0.1 * time; % simulate gradual pitch-down
+roll = 2 * sin(time);    % oscillating roll
+heading = initial_yaw * ones(size(time));
 
 traj_data = [time, latitude, longitude, altitude, roll, pitch, heading];
 
-
-% Shift trajectory to Iceland for FlightGear compatibility
-traj_data = shift_trajectory_to_iceland(traj_data);
+traj_data(:, 4) = traj_data(:, 4) * 0.3048;  % convert ft to m
 
 % Export
 writematrix(traj_data, 'flightgear_trajectory.txt', 'Delimiter', 'tab');
