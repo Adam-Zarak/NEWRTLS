@@ -1,4 +1,3 @@
-% monte_carlo_runner.m
 % Runs the RTLS flight algorithm 1000 times and records final landing distances
 
 clear; clc;

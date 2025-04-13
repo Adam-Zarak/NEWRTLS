@@ -22,18 +22,18 @@ if exist('telemetry_log.csv', 'file')
 end
 
 % Initialize
-current_x = randi([1000, 1100]);
-current_y = randi([1000, 1100]);
-target_x = 250;
-target_y = 250;
+current_x = randi([700, 1100]);
+current_y = randi([700, 1100]);
+target_x = 0;
+target_y = 0;
 dt = 0.1;
 t = 0;
-max_time = 50;
+max_time = 80;
 yaw = randi([0,359]);
 initial_yaw = yaw;
 yaw_error_prev = 0;
 altitude = 750;
-velocity_z = -15;
+velocity_z = -10;
 
 % Wind configuration
 wind_speed_mean = 0;        % Mean wind speed in ft/s
@@ -98,9 +98,9 @@ end
 
 if ~disable_plots_flag
     figure;
-% =======================
+
+
 % 3D Trajectory Plot
-% =======================
 figure;
 
 % Plot trajectory
@@ -154,7 +154,7 @@ global FINAL_DISTANCE;
 % Create traj_data matrix from simulation logs
 % Format: [time, latitude, longitude, altitude, roll, pitch, heading]
 
-time = (0:length(x_log)-1)' * dt;
+%time = (0:length(x_log)-1)' * dt;
 
 % Convert from feet to degrees (local offsets from Iceland)
 % 1 degree latitude ≈ 364,000 ft
