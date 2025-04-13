@@ -40,7 +40,7 @@ figure;
 histogram(valid_results, 50);
 xlabel('Distance from Target (ft)');
 ylabel('Number of Simulations');
-title('RTLS Monte Carlo - Landing Accuracy Across 1000 Runs');
+title('RTLS Monte Carlo - Landing Accuracy Across 100 Runs');
 grid on;
 
 % Print stats

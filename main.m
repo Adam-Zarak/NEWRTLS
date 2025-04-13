@@ -22,8 +22,8 @@ if exist('telemetry_log.csv', 'file')
 end
 
 % Initialize
-current_x = randi([1000, 2000]);
-current_y = randi([1000, 2000]);
+current_x = randi([1000, 1100]);
+current_y = randi([1000, 1100]);
 target_x = 250;
 target_y = 250;
 dt = 0.1;
@@ -150,6 +150,7 @@ end
 
 global FINAL_DISTANCE;
 
+
 % Create traj_data matrix from simulation logs
 % Format: [time, latitude, longitude, altitude, roll, pitch, heading]
 
@@ -158,23 +159,22 @@ time = (0:length(x_log)-1)' * dt;
 % Convert from feet to degrees (local offsets from Iceland)
 % 1 degree latitude ≈ 364,000 ft
 % 1 degree longitude ≈ 288,200 ft at ~64°N
-lat0 = 63.9850;
-lon0 = -22.6050;
+%lat0 = 63.9850;
+%lon0 = -22.6050;
 
-latitude = lat0 + y_log(:) / 364000;
-longitude = lon0 + x_log(:) / 288200;
-altitude = z_log(:);     % Already in feet
-pitch = -5 + 0.1 * time; % simulate gradual pitch-down
-roll = 2 * sin(time);    % oscillating roll
-heading = initial_yaw * ones(size(time));
+%latitude = lat0 + y_log(:) / 364000;
+%longitude = lon0 + x_log(:) / 288200;
+%altitude = z_log(:);     % Already in feet
+%pitch = -5 + 0.1 * time; % simulate gradual pitch-down
+%roll = 2 * sin(time);    % oscillating roll
+%heading = initial_yaw * ones(size(time));
 
-traj_data = [time, latitude, longitude, altitude, roll, pitch, heading];
+%traj_data = [time, latitude, longitude, altitude, roll, pitch, heading];
 
-traj_data(:, 4) = traj_data(:, 4) * 0.3048;  % convert ft to m
+%traj_data(:, 4) = traj_data(:, 4) * 0.3048;  % convert ft to m
 
 % Export
-writematrix(traj_data, 'flightgear_trajectory.txt', 'Delimiter', 'tab');
-fprintf('FlightGear trajectory exported to flightgear_trajectory.txt\n');
-
+%writematrix(traj_data, 'flightgear_trajectory.txt', 'Delimiter', 'tab');
+%fprintf('FlightGear trajectory exported to flightgear_trajectory.txt\n');
 
 
